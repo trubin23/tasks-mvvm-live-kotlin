@@ -1,12 +1,13 @@
-package ru.trubin23.tasks_mvvm_live_kotlin
+package ru.trubin23.tasks_mvvm_live_kotlin.tasks
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import ru.trubin23.tasks_mvvm_live_kotlin.R
 
-class MainActivity : AppCompatActivity() {
+class TasksActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.tasks_act)
     }
 }
