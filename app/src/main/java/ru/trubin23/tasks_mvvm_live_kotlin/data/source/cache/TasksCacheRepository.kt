@@ -20,7 +20,7 @@ class TasksCacheRepository : TasksCacheDataSource {
         mCachedTask.clear()
 
         for (task in tasks){
-            mCachedTask[task.mId] = task
+            mCachedTask[task.id] = task
         }
         mCacheIsDirty = false
     }
@@ -34,7 +34,7 @@ class TasksCacheRepository : TasksCacheDataSource {
     }
 
     override fun addTask(task: Task) {
-        mCachedTask[task.mId] = task
+        mCachedTask[task.id] = task
     }
 
     override fun removeTask(taskId: String) {
@@ -44,7 +44,7 @@ class TasksCacheRepository : TasksCacheDataSource {
     override fun completedTask(taskId: String, completed: Boolean) {
         val task: Task? = getTaskById(taskId)
         if (task != null){
-            task.mIsCompleted = completed
+            task.isCompleted = completed
         }
     }
 
@@ -52,7 +52,7 @@ class TasksCacheRepository : TasksCacheDataSource {
         val iterator = mCachedTask.entries.iterator()
         while (iterator.hasNext()) {
             val entry = iterator.next()
-            if (entry.value.mIsCompleted) {
+            if (entry.value.isCompleted) {
                 iterator.remove()
             }
         }

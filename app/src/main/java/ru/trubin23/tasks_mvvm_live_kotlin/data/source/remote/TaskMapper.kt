@@ -10,8 +10,8 @@ object TaskMapper {
     }
 
     fun taskToNetworkTask(task: Task): NetworkTask {
-        return NetworkTask(task.mId, task.mTitle, task.mDescription,
-                task.mIsCompleted)
+        return NetworkTask(task.id, task.title, task.description,
+                task.isCompleted)
     }
 
     fun networkTaskListToTaskList(networkTaskList: List<NetworkTask>): List<Task> {
