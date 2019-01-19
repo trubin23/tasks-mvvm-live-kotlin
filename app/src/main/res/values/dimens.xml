@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="nav_header_padding">16dp</dimen>
+    <dimen name="nav_header_height">200dp</dimen>
+    <dimen name="nav_header_image_size">120dp</dimen>
+
+    <dimen name="fab_margin">16dp</dimen>
+
+    <dimen name="activity_padding">16dp</dimen>
+    <dimen name="list_of_items_padding">8dp</dimen>
+
+    <dimen name="item_padding">16dp</dimen>
+
+    <dimen name="no_tasks_icon_size">50dp</dimen>
+</resources>
