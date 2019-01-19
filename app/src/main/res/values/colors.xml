@@ -5,4 +5,6 @@
     <color name="colorAccent">#FF4081</color>
 
     <color name="white">@android:color/white</color>
+
+    <drawable name="colorTouchFeedback">#CDD</drawable>
 </resources>

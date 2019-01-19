@@ -7,5 +7,5 @@ interface TaskItemUserActionsListener {
 
     fun onCompleteChanged(task: Task, view: View)
 
-    fun onTaskClocked(task: Task)
+    fun onTaskClicked(task: Task)
 }
