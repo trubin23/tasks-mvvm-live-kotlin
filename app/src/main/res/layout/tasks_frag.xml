@@ -15,8 +15,71 @@
         android:id="@+id/refresh_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:onRefresh="@{viewmodel}"
         app:refreshing="@{viewmodel.dataLoading}">
+
+        <RelativeLayout
+            android:id="@+id/tasksContainer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:id="@+id/tasksLL"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:visibility="@{viewmodel.empty ? View.GONE : View.VISIBLE}">
+
+                <TextView
+                    android:id="@+id/filteringLabel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/filtering_label_margin"
+                    android:gravity="center_vertical"
+                    android:text="@{viewmodel.currentFilteringLabel}"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Title" />
+
+                <ListView
+                    android:id="@+id/tasks_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/noTasks"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:orientation="vertical"
+                android:visibility="@{viewmodel.empty ? View.VISIBLE : View.GONE}">
+
+                <ImageView
+                    android:id="@+id/noTasksIcon"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:src="@{viewmodel.noTaskIconRes}" />
+
+                <TextView
+                    android:id="@+id/noTasksMain"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="8dp"
+                    android:text="@{viewmodel.noTasksLabel}" />
+
+                <TextView
+                    android:id="@+id/noTasksAdd"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@drawable/touch_feedback"
+                    android:gravity="center"
+                    android:onClick="@{() -> viewmodel.addNewTask()}"
+                    android:text="@string/no_tasks_add"
+                    android:visibility="@{viewmodel.tasksAddViewVisible ? View.VISIBLE : View.GONE}" />
+            </LinearLayout>
+
+        </RelativeLayout>
 
     </ru.trubin23.tasks_mvvm_live_kotlin.ScrollChildSwipeRefreshLayout>
 

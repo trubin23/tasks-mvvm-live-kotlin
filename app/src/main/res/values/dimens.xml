@@ -9,6 +9,8 @@
     <dimen name="activity_padding">16dp</dimen>
     <dimen name="list_of_items_padding">8dp</dimen>
 
+    <dimen name="filtering_label_margin">8dp</dimen>
+
     <dimen name="item_padding">16dp</dimen>
 
     <dimen name="no_tasks_icon_size">50dp</dimen>
