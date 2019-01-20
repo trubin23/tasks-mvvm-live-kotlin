@@ -3,13 +3,17 @@ package ru.trubin23.tasks_mvvm_live_kotlin.tasks
 import android.app.Application
 import android.arch.lifecycle.AndroidViewModel
 import android.content.Context
+import android.databinding.ObservableArrayList
 import android.databinding.ObservableBoolean
 import android.databinding.ObservableField
+import android.databinding.ObservableList
 import android.graphics.drawable.Drawable
 import android.support.annotation.DrawableRes
 import android.support.annotation.StringRes
 import ru.trubin23.tasks_mvvm_live_kotlin.R
 import ru.trubin23.tasks_mvvm_live_kotlin.SingleLiveEvent
+import ru.trubin23.tasks_mvvm_live_kotlin.data.Task
+import ru.trubin23.tasks_mvvm_live_kotlin.data.source.TasksDataSource
 import ru.trubin23.tasks_mvvm_live_kotlin.data.source.TasksRepository
 
 class TasksViewModel(
@@ -22,6 +26,9 @@ class TasksViewModel(
     val openTaskEvent = SingleLiveEvent<String>()
     val newTaskEvent = SingleLiveEvent<Void>()
     val snackbarMessage = SingleLiveEvent<Int>()
+
+    val items: ObservableList<Task> = ObservableArrayList()
+    val empty = ObservableBoolean(false)
 
     val currentFilteringLabel = ObservableField<String>()
     val noTasksLabel = ObservableField<String>()
@@ -37,7 +44,7 @@ class TasksViewModel(
             updateFiltering()
         }
 
-    fun start(){
+    fun start() {
         loadTasks(false)
     }
 
@@ -45,10 +52,44 @@ class TasksViewModel(
         loadTasks(forceUpdate, true)
     }
 
-    private fun loadTasks(forceUpdate: Boolean, showLoadingUI: Boolean){
-        if (showLoadingUI){
-            //dataLoading.set(true)
+    private fun loadTasks(forceUpdate: Boolean, showLoadingUI: Boolean) {
+        if (showLoadingUI) {
+            dataLoading.set(true)
         }
+        if (forceUpdate) {
+            tasksRepository.refreshTasks()
+        }
+
+        tasksRepository.getTasks(object : TasksDataSource.LoadTasksCallback {
+            override fun onTasksLoaded(tasks: List<Task>) {
+                val tasksToShow: List<Task> = when (currentFiltering) {
+                    TasksFilterType.ALL_TASKS ->
+                        tasks
+                    TasksFilterType.ACTIVE_TASKS ->
+                        tasks.filter { it.isActive }
+                    TasksFilterType.COMPLETED_TASKS ->
+                        tasks.filter { it.isCompleted }
+                }
+
+                with(items) {
+                    clear()
+                    addAll(tasksToShow)
+                    empty.set(isEmpty())
+                }
+
+                if (showLoadingUI) {
+                    dataLoading.set(false)
+                }
+                isDataLoadingError.set(false)
+            }
+
+            override fun onDataNotAvailable() {
+                if (showLoadingUI) {
+                    dataLoading.set(false)
+                }
+                isDataLoadingError.set(true)
+            }
+        })
     }
 
     private fun updateFiltering() {
@@ -77,5 +118,11 @@ class TasksViewModel(
             noTaskIconRes.set(getDrawable(noTaskIconDrawable))
             tasksAddViewVisible.set(tasksAddVisible)
         }
+    }
+
+    fun clearCompletedTasks(){
+        tasksRepository.clearCompletedTasks()
+        snackbarMessage.value = R.string.completed_tasks_cleared
+        loadTasks(false, false)
     }
 }
