@@ -65,6 +65,8 @@ class TasksActivity : AppCompatActivity(), TaskItemNavigator, TasksNavigator {
 
     }
 
+//    fun obtainViewModel(): TasksViewModel = obtainViewModel()
+
     companion object {
         const val REQUEST_CODE = 1
 
