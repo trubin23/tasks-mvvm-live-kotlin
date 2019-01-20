@@ -15,6 +15,7 @@
         android:id="@+id/refresh_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:onRefresh="@{viewmodel}"
         app:refreshing="@{viewmodel.dataLoading}">
 
         <RelativeLayout
@@ -41,7 +42,8 @@
                 <ListView
                     android:id="@+id/tasks_list"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    app:items="@{viewmodel.items}" />
             </LinearLayout>
 
             <LinearLayout
