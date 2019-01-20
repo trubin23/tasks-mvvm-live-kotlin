@@ -120,9 +120,39 @@ class TasksViewModel(
         }
     }
 
-    fun clearCompletedTasks(){
+    fun clearCompletedTasks() {
         tasksRepository.clearCompletedTasks()
         snackbarMessage.value = R.string.completed_tasks_cleared
         loadTasks(false, false)
+    }
+
+    fun completeTask(task: Task, completed: Boolean) {
+        task.isCompleted = completed
+
+        tasksRepository.completedTask(task.id, completed)
+        if (completed) {
+            showSnackbarMessage(R.string.task_marked_complete)
+        } else {
+            showSnackbarMessage(R.string.task_marked_active)
+        }
+    }
+
+    private fun showSnackbarMessage(messageId: Int) {
+        snackbarMessage.value = messageId
+    }
+
+    fun addNewTask() {
+        newTaskEvent.call()
+    }
+
+    fun handleActivityResult(requestCode: Int, resultCode: Int) {
+        if (TasksActivity.REQUEST_CODE == requestCode) {
+            snackbarMessage.value = when (resultCode) {
+                TasksActivity.DELETE_RESULT_OK -> R.string.successfully_deleted_task_message
+                TasksActivity.EDIT_RESULT_OK -> R.string.successfully_saved_task_message
+                TasksActivity.ADD_RESULT_OK -> R.string.successfully_added_task_message
+                else -> return
+            }
+        }
     }
 }

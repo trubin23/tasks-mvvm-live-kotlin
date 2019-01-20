@@ -26,13 +26,21 @@ class TasksActivity : AppCompatActivity() {
     }
 
     private fun setupViewFragment() {
-        supportFragmentManager.findFragmentById(R.id.contentFrame) ?:
-                TasksFragment.newInstance().let {
+        supportFragmentManager.findFragmentById(R.id.contentFrame)
+                ?: TasksFragment.newInstance().let {
                     addFragmentToActivity(it, R.id.contentFrame)
                 }
     }
 
     private fun setupNavigationDrawer() {
 
+    }
+
+    companion object {
+        const val REQUEST_CODE = 1
+
+        const val DELETE_RESULT_OK = 1
+        const val EDIT_RESULT_OK = 2
+        const val ADD_RESULT_OK = 3
     }
 }
