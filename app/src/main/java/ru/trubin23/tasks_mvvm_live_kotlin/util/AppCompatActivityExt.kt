@@ -1,7 +1,6 @@
 package ru.trubin23.tasks_mvvm_live_kotlin.util
 
 import android.arch.lifecycle.ViewModel
-import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.support.annotation.IdRes
 import android.support.v4.app.Fragment
@@ -30,7 +29,8 @@ fun AppCompatActivity.setupActionBar(@IdRes toolbarId: Int, action: ActionBar.()
     }
 }
 
-//fun <T : ViewModel> AppCompatActivity.obtainViewModel(viewModelClass: Class<T>) =
-//        ViewModelProviders
-//                .of(this, ViewModelFactory.getInstance(application))
-//                .get(viewModelClass)
+fun <T : ViewModel> AppCompatActivity.obtainViewModel(viewModelClass: Class<T>): T {
+    return ViewModelProviders
+            .of(this, ViewModelFactory.getInstance(application))
+            .get(viewModelClass)
+}

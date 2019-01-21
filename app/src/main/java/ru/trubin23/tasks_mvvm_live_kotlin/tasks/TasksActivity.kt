@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity
 import ru.trubin23.tasks_mvvm_live_kotlin.R
 import ru.trubin23.tasks_mvvm_live_kotlin.statistics.StatisticsActivity
 import ru.trubin23.tasks_mvvm_live_kotlin.util.addFragmentToActivity
+import ru.trubin23.tasks_mvvm_live_kotlin.util.obtainViewModel
 import ru.trubin23.tasks_mvvm_live_kotlin.util.setupActionBar
 
 class TasksActivity : AppCompatActivity(), TaskItemNavigator, TasksNavigator {
@@ -46,7 +47,7 @@ class TasksActivity : AppCompatActivity(), TaskItemNavigator, TasksNavigator {
 
     private fun setupDrawerContent(navigationView: NavigationView) {
         navigationView.setNavigationItemSelectedListener { menuItem ->
-            if (menuItem.itemId == R.id.statistics_nav_menu_item){
+            if (menuItem.itemId == R.id.statistics_nav_menu_item) {
                 val intent = Intent(this@TasksActivity, StatisticsActivity::class.java)
                 startActivity(intent)
             }
@@ -65,7 +66,7 @@ class TasksActivity : AppCompatActivity(), TaskItemNavigator, TasksNavigator {
 
     }
 
-//    fun obtainViewModel(): TasksViewModel = obtainViewModel()
+    fun obtainViewModel(): TasksViewModel = obtainViewModel(TasksViewModel::class.java)
 
     companion object {
         const val REQUEST_CODE = 1
