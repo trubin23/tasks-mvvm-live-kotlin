@@ -10,4 +10,8 @@ class TaskDetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.taskdetail_act)
     }
+
+    companion object {
+        const val EXTRA_TASK_ID = "TASK_ID"
+    }
 }
