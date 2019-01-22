@@ -21,6 +21,10 @@ class TasksViewModel(
         private val tasksRepository: TasksRepository
 ) : AndroidViewModel(context) {
 
+    init {
+
+    }
+
     private val context: Context = context.applicationContext
 
     val openTaskEvent = SingleLiveEvent<String>()
@@ -43,6 +47,10 @@ class TasksViewModel(
             field = value
             updateFiltering()
         }
+
+    init {
+        updateFiltering()
+    }
 
     fun start() {
         loadTasks(true)
