@@ -100,6 +100,7 @@ class TasksFragment : Fragment() {
                         R.id.menu_completed -> TasksFilterType.COMPLETED_TASKS
                         else -> TasksFilterType.ALL_TASKS
                     }
+                    loadTasks(false)
                 }
                 true
             }

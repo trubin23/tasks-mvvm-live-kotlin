@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewmodel"
+            type="ru.trubin23.tasks_mvvm_live_kotlin.taskdetail.TaskDetailViewModel" />
+
+        <variable
+            name="listener"
+            type="ru.trubin23.tasks_mvvm_live_kotlin.taskdetail.TaskDetailUserActionsListener" />
+    </data>
+
+    <ru.trubin23.tasks_mvvm_live_kotlin.ScrollChildSwipeRefreshLayout
+        android:id="@+id/refresh_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </ru.trubin23.tasks_mvvm_live_kotlin.ScrollChildSwipeRefreshLayout>
+
+</layout>
