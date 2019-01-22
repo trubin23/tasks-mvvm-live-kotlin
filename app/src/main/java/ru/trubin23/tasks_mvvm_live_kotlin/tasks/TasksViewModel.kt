@@ -45,7 +45,7 @@ class TasksViewModel(
         }
 
     fun start() {
-        loadTasks(false)
+        loadTasks(true)
     }
 
     fun loadTasks(forceUpdate: Boolean) {

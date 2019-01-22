@@ -30,7 +30,7 @@ class TasksFragment : Fragment() {
         setupListAdapter()
         setupRefreshLayout()
 
-        return super.onCreateView(inflater, container, savedInstanceState)
+        return viewDataBinding.root
     }
 
     override fun onResume() {
