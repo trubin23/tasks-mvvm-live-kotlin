@@ -30,4 +30,6 @@
     <string name="menu_all">All</string>
     <string name="menu_active">Active</string>
     <string name="menu_completed">Completed</string>
+
+    <string name="no_data">No data</string>
 </resources>
