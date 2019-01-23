@@ -4,6 +4,8 @@ import android.app.Application
 import android.arch.lifecycle.AndroidViewModel
 import android.databinding.ObservableBoolean
 import android.databinding.ObservableField
+import android.support.annotation.StringRes
+import ru.trubin23.tasks_mvvm_live_kotlin.R
 import ru.trubin23.tasks_mvvm_live_kotlin.SingleLiveEvent
 import ru.trubin23.tasks_mvvm_live_kotlin.data.Task
 import ru.trubin23.tasks_mvvm_live_kotlin.data.source.TasksDataSource
@@ -22,7 +24,7 @@ class TaskDetailViewModel(
 
     private val editTaskCommand = SingleLiveEvent<Void>()
     private val deleteTaskCommand = SingleLiveEvent<Void>()
-    private val snackbarText = SingleLiveEvent<Int>()
+    private val snackbarMessage = SingleLiveEvent<Int>()
 
     var isDataLoading = false
         private set
@@ -34,14 +36,20 @@ class TaskDetailViewModel(
         taskId ?: return
 
         isDataLoading = true
-        tasksRepository.getTask(taskId, object : TasksDataSource.GetTaskCallback{
+
+        tasksRepository.getTask(taskId, object : TasksDataSource.GetTaskCallback {
             override fun onTaskLoaded(task: Task) {
-                //TODO: implement
+                this@TaskDetailViewModel.task.set(task)
+                title.set(task.title)
+                description.set(task.description)
+                completed.set(task.isCompleted)
+
                 isDataLoading = false
             }
 
             override fun onDataNotAvailable() {
-                //TODO: implement
+                task.set(null)
+
                 isDataLoading = false
             }
         })
@@ -58,5 +66,30 @@ class TaskDetailViewModel(
         editTaskCommand.call()
     }
 
+    fun onRefresh() {
+        if (task.get() != null) {
+            start(task.get()?.id)
+        }
+    }
 
+    fun setCompleted(completed: Boolean) {
+        if (isDataLoading) {
+            return
+        }
+
+        val task = this.task.get()?.apply {
+            isCompleted = completed
+        }
+
+        tasksRepository.completedTask(task?.id ?: return, completed)
+        if (completed) {
+            showSnackbarMessage(R.string.task_marked_complete)
+        } else {
+            showSnackbarMessage(R.string.task_marked_active)
+        }
+    }
+
+    private fun showSnackbarMessage(@StringRes message: Int) {
+        snackbarMessage.value = message
+    }
 }
