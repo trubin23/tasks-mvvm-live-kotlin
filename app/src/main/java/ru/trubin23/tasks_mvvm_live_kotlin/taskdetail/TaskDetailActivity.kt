@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import ru.trubin23.tasks_mvvm_live_kotlin.R
+import ru.trubin23.tasks_mvvm_live_kotlin.addedittask.AddEditTaskActivity
 import ru.trubin23.tasks_mvvm_live_kotlin.tasks.TasksActivity
 import ru.trubin23.tasks_mvvm_live_kotlin.util.*
 
@@ -39,6 +40,11 @@ class TaskDetailActivity : AppCompatActivity(), TaskDetailNavigator {
         }
     }
 
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
+    }
+
     private fun setupViewFragment() {
         supportFragmentManager.findFragmentById(R.id.contentFrame)
                 ?: TaskDetailFragment.newInstance(intent.getStringExtra(EXTRA_TASK_ID)).let {
@@ -47,11 +53,16 @@ class TaskDetailActivity : AppCompatActivity(), TaskDetailNavigator {
     }
 
     override fun onTaskDeleted() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        setResult(DELETE_RESULT_OK)
+        finish()
     }
 
     override fun onStartEditTask() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        val taskId = intent.getStringExtra(EXTRA_TASK_ID)
+        val intent = Intent(this, AddEditTaskActivity::class.java).apply {
+            putExtra(AddEditTaskActivity.ARGUMENT_EDIT_TASK_ID, taskId)
+        }
+        startActivityForResult(intent, REQUEST_EDIT_TASK)
     }
 
     fun obtainViewModel(): TaskDetailViewModel = obtainViewModel(TaskDetailViewModel::class.java)

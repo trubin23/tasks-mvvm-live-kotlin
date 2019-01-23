@@ -110,7 +110,7 @@ class TasksViewModel(
                         R.drawable.ic_check_circle, false)
             }
             TasksFilterType.COMPLETED_TASKS -> {
-                setFilter(R.string.label_all, R.string.no_tasks_all,
+                setFilter(R.string.label_completed, R.string.no_tasks_all,
                         R.drawable.ic_check_box, false)
             }
         }

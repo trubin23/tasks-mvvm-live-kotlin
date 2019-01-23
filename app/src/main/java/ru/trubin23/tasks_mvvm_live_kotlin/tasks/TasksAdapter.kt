@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
+import android.widget.CheckBox
 import ru.trubin23.tasks_mvvm_live_kotlin.data.Task
 import ru.trubin23.tasks_mvvm_live_kotlin.databinding.TaskItemBinding
 
@@ -14,7 +15,7 @@ class TasksAdapter(
 ) : BaseAdapter() {
 
     override fun getView(position: Int, view: View?, parent: ViewGroup?): View {
-        val binding: TaskItemBinding = if (view == null){
+        val binding: TaskItemBinding = if (view == null) {
             val inflater = LayoutInflater.from(parent?.context)
 
             TaskItemBinding.inflate(inflater, parent, false)
@@ -22,15 +23,18 @@ class TasksAdapter(
             DataBindingUtil.getBinding(view)!!
         }
 
-        val  userActionsListener = object : TaskItemUserActionsListener{
+        val userActionsListener = object : TaskItemUserActionsListener {
             override fun onCompleteChanged(task: Task, view: View) {
+                val checked = (view as CheckBox).isChecked
+                tasksViewModel.completeTask(task, checked)
             }
 
             override fun onTaskClicked(task: Task) {
+                tasksViewModel.openTaskEvent.value = task.id
             }
         }
 
-        with(binding){
+        with(binding) {
             task = getItem(position)
             listener = userActionsListener
             executePendingBindings()

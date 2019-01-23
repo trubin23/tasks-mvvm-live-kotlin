@@ -10,4 +10,8 @@ class AddEditTaskActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.addedittask_act)
     }
+
+    companion object {
+        const val ARGUMENT_EDIT_TASK_ID = "EDIT_TASK_ID"
+    }
 }
