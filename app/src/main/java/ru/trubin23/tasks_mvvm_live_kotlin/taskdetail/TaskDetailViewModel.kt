@@ -22,9 +22,9 @@ class TaskDetailViewModel(
     val description = ObservableField<String>()
     val completed = ObservableBoolean()
 
-    private val editTaskCommand = SingleLiveEvent<Void>()
-    private val deleteTaskCommand = SingleLiveEvent<Void>()
-    private val snackbarMessage = SingleLiveEvent<Int>()
+    val editTaskCommand = SingleLiveEvent<Void>()
+    val deleteTaskCommand = SingleLiveEvent<Void>()
+    val snackbarMessage = SingleLiveEvent<Int>()
 
     var isDataLoading = false
         private set

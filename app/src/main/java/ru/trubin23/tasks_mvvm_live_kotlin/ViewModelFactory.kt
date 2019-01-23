@@ -4,6 +4,7 @@ import android.app.Application
 import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
 import ru.trubin23.tasks_mvvm_live_kotlin.data.source.TasksRepository
+import ru.trubin23.tasks_mvvm_live_kotlin.taskdetail.TaskDetailViewModel
 import ru.trubin23.tasks_mvvm_live_kotlin.tasks.TasksViewModel
 import ru.trubin23.tasks_mvvm_live_kotlin.util.Injection
 
@@ -15,6 +16,8 @@ class ViewModelFactory private constructor(
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         return with(modelClass) {
             when {
+                isAssignableFrom(TaskDetailViewModel::class.java) ->
+                    TaskDetailViewModel(application, tasksRepository)
                 isAssignableFrom(TasksViewModel::class.java) ->
                     TasksViewModel(application, tasksRepository)
                 else ->
