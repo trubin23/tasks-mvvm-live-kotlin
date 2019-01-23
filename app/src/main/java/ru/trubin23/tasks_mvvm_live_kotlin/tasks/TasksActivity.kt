@@ -105,9 +105,5 @@ class TasksActivity : AppCompatActivity(), TaskItemNavigator, TasksNavigator {
 
     companion object {
         const val REQUEST_CODE = 1
-
-        const val DELETE_RESULT_OK = 1
-        const val EDIT_RESULT_OK = 2
-        const val ADD_RESULT_OK = 3
     }
 }

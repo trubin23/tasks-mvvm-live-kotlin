@@ -3,9 +3,7 @@ package ru.trubin23.tasks_mvvm_live_kotlin.taskdetail
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.CheckBox
 import ru.trubin23.tasks_mvvm_live_kotlin.R
 import ru.trubin23.tasks_mvvm_live_kotlin.databinding.TaskdetailFragBinding
@@ -19,7 +17,7 @@ class TaskDetailFragment : Fragment() {
         val view = inflater.inflate(R.layout.taskdetail_frag, container, false)
         viewDataBinding = TaskdetailFragBinding.bind(view).apply {
             viewmodel = (activity as TaskDetailActivity).obtainViewModel()
-            listener = object : TaskDetailUserActionsListener{
+            listener = object : TaskDetailUserActionsListener {
                 override fun onCompleteChanged(view: View) {
                     viewmodel?.setCompleted((view as CheckBox).isChecked)
                 }
@@ -47,7 +45,25 @@ class TaskDetailFragment : Fragment() {
         }
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+        inflater?.inflate(R.menu.task_detail_frag_menu, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        if (item?.itemId == R.id.menu_delete) {
+            viewDataBinding.viewmodel?.deleteTask()
+            return true
+        }
+        return false
+    }
+
     companion object {
         private const val ARGUMENT_TASK_ID = "TASK_ID"
+
+        fun newInstance(taskId: String) = TaskDetailFragment().apply {
+            arguments = Bundle().apply {
+                putString(ARGUMENT_TASK_ID, taskId)
+            }
+        }
     }
 }

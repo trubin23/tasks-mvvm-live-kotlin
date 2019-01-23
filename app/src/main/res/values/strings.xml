@@ -32,4 +32,6 @@
     <string name="menu_completed">Completed</string>
 
     <string name="no_data">No data</string>
+
+    <string name="menu_delete_task">Delete task</string>
 </resources>

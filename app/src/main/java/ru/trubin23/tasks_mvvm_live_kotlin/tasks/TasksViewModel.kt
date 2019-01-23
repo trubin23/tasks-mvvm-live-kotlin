@@ -15,6 +15,9 @@ import ru.trubin23.tasks_mvvm_live_kotlin.SingleLiveEvent
 import ru.trubin23.tasks_mvvm_live_kotlin.data.Task
 import ru.trubin23.tasks_mvvm_live_kotlin.data.source.TasksDataSource
 import ru.trubin23.tasks_mvvm_live_kotlin.data.source.TasksRepository
+import ru.trubin23.tasks_mvvm_live_kotlin.util.ADD_RESULT_OK
+import ru.trubin23.tasks_mvvm_live_kotlin.util.DELETE_RESULT_OK
+import ru.trubin23.tasks_mvvm_live_kotlin.util.EDIT_RESULT_OK
 
 class TasksViewModel(
         context: Application,
@@ -152,9 +155,9 @@ class TasksViewModel(
     fun handleActivityResult(requestCode: Int, resultCode: Int) {
         if (TasksActivity.REQUEST_CODE == requestCode) {
             snackbarMessage.value = when (resultCode) {
-                TasksActivity.DELETE_RESULT_OK -> R.string.successfully_deleted_task_message
-                TasksActivity.EDIT_RESULT_OK -> R.string.successfully_saved_task_message
-                TasksActivity.ADD_RESULT_OK -> R.string.successfully_added_task_message
+                DELETE_RESULT_OK -> R.string.successfully_deleted_task_message
+                EDIT_RESULT_OK -> R.string.successfully_saved_task_message
+                ADD_RESULT_OK -> R.string.successfully_added_task_message
                 else -> return
             }
         }

@@ -10,6 +10,10 @@ import android.support.v7.app.ActionBar
 import android.support.v7.app.AppCompatActivity
 import ru.trubin23.tasks_mvvm_live_kotlin.ViewModelFactory
 
+const val DELETE_RESULT_OK = 1
+const val EDIT_RESULT_OK = 2
+const val ADD_RESULT_OK = 3
+
 fun AppCompatActivity.addFragmentToActivity(fragment: Fragment, @IdRes frameId: Int) {
     supportFragmentManager.transaction {
         add(frameId, fragment)
