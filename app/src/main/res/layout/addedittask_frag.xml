@@ -30,7 +30,19 @@
                 android:padding="@dimen/activity_padding"
                 android:visibility="@{viewmodel.dataLoading ? View.GONE : View.VISIBLE}">
 
+                <EditText
+                    android:id="@+id/add_edit_task_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/title_hint"
+                    android:text="@={viewmodel.title}" />
 
+                <EditText
+                    android:id="@+id/add_edit_task_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/description_hint"
+                    android:text="@={viewmodel.description}"/>
 
             </LinearLayout>
 
