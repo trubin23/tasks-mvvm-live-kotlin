@@ -23,14 +23,19 @@ class TasksFragment : Fragment() {
         }
         setHasOptionsMenu(true)
 
-        viewDataBinding.viewmodel?.let {
-            view?.setupSnackbar(this, it.snackbarMessage, Snackbar.LENGTH_LONG)
-        }
         setupFab()
         setupListAdapter()
         setupRefreshLayout()
 
         return viewDataBinding.root
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+
+        viewDataBinding.viewmodel?.let {
+            view?.setupSnackbar(this, it.snackbarMessage, Snackbar.LENGTH_LONG)
+        }
     }
 
     override fun onResume() {
