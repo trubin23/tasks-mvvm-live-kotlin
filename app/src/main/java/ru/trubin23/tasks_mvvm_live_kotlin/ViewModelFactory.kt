@@ -3,7 +3,9 @@ package ru.trubin23.tasks_mvvm_live_kotlin
 import android.app.Application
 import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
+import ru.trubin23.tasks_mvvm_live_kotlin.addedittask.AddEditTaskViewModel
 import ru.trubin23.tasks_mvvm_live_kotlin.data.source.TasksRepository
+import ru.trubin23.tasks_mvvm_live_kotlin.statistics.StatisticsViewModel
 import ru.trubin23.tasks_mvvm_live_kotlin.taskdetail.TaskDetailViewModel
 import ru.trubin23.tasks_mvvm_live_kotlin.tasks.TasksViewModel
 import ru.trubin23.tasks_mvvm_live_kotlin.util.Injection
@@ -20,6 +22,10 @@ class ViewModelFactory private constructor(
                     TaskDetailViewModel(application, tasksRepository)
                 isAssignableFrom(TasksViewModel::class.java) ->
                     TasksViewModel(application, tasksRepository)
+                isAssignableFrom(AddEditTaskViewModel::class.java) ->
+                    AddEditTaskViewModel(application, tasksRepository)
+                isAssignableFrom(StatisticsViewModel::class.java) ->
+                    StatisticsViewModel(application, tasksRepository)
                 else ->
                     throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")
             }
