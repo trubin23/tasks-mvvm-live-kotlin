@@ -4,11 +4,11 @@
 
     <data>
 
-        <import type="android.view.View"/>
+        <import type="android.view.View" />
 
         <variable
             name="viewmodel"
-            type="ru.trubin23.tasks_mvvm_live_kotlin.addedittask.AddEditTaskViewModel"/>
+            type="ru.trubin23.tasks_mvvm_live_kotlin.addedittask.AddEditTaskViewModel" />
     </data>
 
 
@@ -23,28 +23,31 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <LinearLayout
+            <android.support.constraint.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
                 android:padding="@dimen/activity_padding"
                 android:visibility="@{viewmodel.dataLoading ? View.GONE : View.VISIBLE}">
 
                 <EditText
-                    android:id="@+id/add_edit_task_title"
-                    android:layout_width="match_parent"
+                    android:id="@+id/add_task_title"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:hint="@string/title_hint"
-                    android:text="@={viewmodel.title}" />
+                    android:maxLines="1"
+                    android:text="@={viewmodel.title}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <EditText
-                    android:id="@+id/add_edit_task_description"
+                    android:id="@+id/add_task_description"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/description_hint"
-                    android:text="@={viewmodel.description}"/>
-
-            </LinearLayout>
+                    android:text="@={viewmodel.description}"
+                    app:layout_constraintTop_toBottomOf="@id/add_task_title" />
+            </android.support.constraint.ConstraintLayout>
 
         </ScrollView>
 
