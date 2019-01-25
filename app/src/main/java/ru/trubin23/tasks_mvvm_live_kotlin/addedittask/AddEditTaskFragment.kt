@@ -8,7 +8,6 @@ import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import kotlinx.android.synthetic.main.task_item.*
 import ru.trubin23.tasks_mvvm_live_kotlin.R
 import ru.trubin23.tasks_mvvm_live_kotlin.addedittask.AddEditTaskActivity.Companion.ARGUMENT_EDIT_TASK_ID
 import ru.trubin23.tasks_mvvm_live_kotlin.databinding.AddedittaskFragBinding
@@ -41,8 +40,8 @@ class AddEditTaskFragment : Fragment() {
         return viewDataBinding.root
     }
 
-    private fun setupActionBar(){
-        val title = if (arguments?.get(ARGUMENT_EDIT_TASK_ID)!= null){
+    private fun setupActionBar() {
+        val title = if (arguments?.get(ARGUMENT_EDIT_TASK_ID) != null) {
             R.string.title_edit_task
         } else {
             R.string.title_add_task
@@ -57,7 +56,8 @@ class AddEditTaskFragment : Fragment() {
     }
 
     companion object {
-        fun newInstance(taskId: String) = AddEditTaskFragment().apply {
+        fun newInstance(taskId: String?) = AddEditTaskFragment().apply {
+            taskId ?: return@apply
             arguments = Bundle().apply {
                 putString(ARGUMENT_EDIT_TASK_ID, taskId)
             }
