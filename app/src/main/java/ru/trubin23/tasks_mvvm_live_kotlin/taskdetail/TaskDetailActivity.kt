@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import ru.trubin23.tasks_mvvm_live_kotlin.R
 import ru.trubin23.tasks_mvvm_live_kotlin.addedittask.AddEditTaskActivity
-import ru.trubin23.tasks_mvvm_live_kotlin.tasks.TasksActivity
 import ru.trubin23.tasks_mvvm_live_kotlin.util.*
 
 class TaskDetailActivity : AppCompatActivity(), TaskDetailNavigator {

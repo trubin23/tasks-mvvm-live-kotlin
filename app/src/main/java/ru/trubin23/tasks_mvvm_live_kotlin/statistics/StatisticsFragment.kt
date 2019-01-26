@@ -15,13 +15,13 @@ class StatisticsFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-//        val viewDataBinding = DataBindingUtil.inflate(inflater,
-//                R.layout.statistics_frag, container, false)
-//
-//        viewModel = (activity as StatisticsActivity).obtainViewModel()
-//        viewDataBinding.viewmodel = viewModel
+        val viewDataBinding: StatisticsFragBinding = DataBindingUtil.inflate(inflater,
+                R.layout.statistics_frag, container, false)
 
-        return super.onCreateView(inflater, container, savedInstanceState)//viewDataBinding.root
+        viewModel = (activity as StatisticsActivity).obtainViewModel()
+        viewDataBinding.viewmodel = viewModel
+
+        return viewDataBinding.root
     }
 
     override fun onResume() {

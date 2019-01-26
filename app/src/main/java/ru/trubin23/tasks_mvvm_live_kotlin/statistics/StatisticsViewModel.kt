@@ -44,7 +44,7 @@ class StatisticsViewModel(
     private fun updateDataBindingObservables() {
         numberOfCompletedTasksString.set(
                 context.getString(R.string.statistics_completed_tasks, numberOfCompletedTasks))
-        numberOfCompletedTasksString.set(
+        numberOfActiveTasksString.set(
                 context.getString(R.string.statistics_active_tasks, numberOfActiveTasks))
 
         empty.set(numberOfActiveTasks + numberOfCompletedTasks == 0)
