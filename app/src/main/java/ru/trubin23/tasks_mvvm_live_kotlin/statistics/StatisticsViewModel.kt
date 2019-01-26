@@ -4,12 +4,13 @@ import android.app.Application
 import android.arch.lifecycle.AndroidViewModel
 import android.databinding.ObservableBoolean
 import android.databinding.ObservableField
+import ru.trubin23.tasks_mvvm_live_kotlin.R
 import ru.trubin23.tasks_mvvm_live_kotlin.data.Task
 import ru.trubin23.tasks_mvvm_live_kotlin.data.source.TasksDataSource
 import ru.trubin23.tasks_mvvm_live_kotlin.data.source.TasksRepository
 
 class StatisticsViewModel(
-        context: Application,
+        private val context: Application,
         private val tasksRepository: TasksRepository
 ) : AndroidViewModel(context) {
 
@@ -23,16 +24,31 @@ class StatisticsViewModel(
     private var numberOfActiveTasks = 0
     private var numberOfCompletedTasks = 0
 
-    fun start(){
+    fun start() {
         dataLoading.set(true)
-        tasksRepository.getTasks(object : TasksDataSource.LoadTasksCallback{
+        tasksRepository.getTasks(object : TasksDataSource.LoadTasksCallback {
             override fun onTasksLoaded(tasks: List<Task>) {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                numberOfCompletedTasks = tasks.count { it.isCompleted }
+                numberOfActiveTasks = tasks.size - numberOfCompletedTasks
+                updateDataBindingObservables()
             }
 
             override fun onDataNotAvailable() {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                numberOfCompletedTasks = 0
+                numberOfActiveTasks = 0
+                updateDataBindingObservables()
             }
         })
+    }
+
+    private fun updateDataBindingObservables() {
+        numberOfCompletedTasksString.set(
+                context.getString(R.string.statistics_completed_tasks, numberOfCompletedTasks))
+        numberOfCompletedTasksString.set(
+                context.getString(R.string.statistics_active_tasks, numberOfActiveTasks))
+
+        empty.set(numberOfActiveTasks + numberOfCompletedTasks == 0)
+
+        dataLoading.set(false)
     }
 }

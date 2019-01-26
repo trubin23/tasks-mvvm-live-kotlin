@@ -3,8 +3,10 @@ package ru.trubin23.tasks_mvvm_live_kotlin.statistics
 import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.NavigationView
+import android.support.v4.view.GravityCompat
 import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.AppCompatActivity
+import android.view.MenuItem
 import ru.trubin23.tasks_mvvm_live_kotlin.R
 import ru.trubin23.tasks_mvvm_live_kotlin.tasks.TasksActivity
 import ru.trubin23.tasks_mvvm_live_kotlin.util.addFragmentToActivity
@@ -55,6 +57,17 @@ class StatisticsActivity : AppCompatActivity() {
                 ?: StatisticsFragment.newInstance().let {
                     addFragmentToActivity(it, R.id.contentFrame)
                 }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            android.R.id.home -> {
+                drawerLayout.openDrawer(GravityCompat.START)
+                true
+            }
+
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 
     fun obtainViewModel(): StatisticsViewModel = obtainViewModel(StatisticsViewModel::class.java)
